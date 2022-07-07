@@ -28,7 +28,7 @@ ACCNT	"%s"	EXP	"%s"
 TRNS,,%s,%s,"%s","%s","%s","%s","%s",N
 SPL,,%s,%s,"%s",,"%s","%s",,N
 ENDTRNS''' 
-# JPMC Biz Credit card template, 8 fileds in downoaded CSV
+# JPMC Credit card template, 8 fileds in downoaded CSV
 # Card	Transaction Date	Post Date	Description	Category	Type	Amount	Memo
     output_file.write(head % (default, default))
     for trans in input_file:
@@ -63,6 +63,7 @@ ENDTRNS'''
         description = description.strip("\n")
         description = description.strip("\r")
 
+        # Map bank categraty to QB chart of account name
         if "Food & Drink" in category:
             category = 'Meals and Entertainment:Food & Drink'
         elif "Bills & Utilities" in category:
@@ -81,9 +82,7 @@ ENDTRNS'''
         elif "Return" in transtype:
             transtype = 'CCARD REFUND'
         else:
-            #name = 'Check ' + transtype
-            #docnum = transtype
-            transtype = 'CREDIT CARD'
+           transtype = 'CREDIT CARD'
             account1 = category #'Ask My Accountant'
         name = ''
         transact = template % (transtype,date,account,name,amount,docnum,description,transtype,date,account1,-amount,docnum)
