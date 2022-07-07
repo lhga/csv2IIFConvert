@@ -30,10 +30,7 @@ data class Transaction(
     val amount: String,
     val memo: String
 ){
-
-    constructor(
-        line:Array<String>
-    ): this(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7])
+    constructor( line:Array<String> ): this(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7])
     val PAYEE = ""
     val docnum = ""
     fun toIIF(): String = "TRNS\t\t${type}\t${transactionDate}\t\"${account}\"\t\"${PAYEE}\"\t\"${amount}\"\t\"${docnum}\"\t\"${description}\"\tN\n\r" +
